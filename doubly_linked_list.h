@@ -173,7 +173,11 @@ bool DoublyLinkedList<T>::removeFront() {
  */
 template <typename T>
 bool DoublyLinkedList<T>::removeBack() {
-	return false;
+	if(numElements == 0){
+		return false;
+	}
+	removeNode(tail->prev);
+	return true;
 }
 
 /**
@@ -185,7 +189,18 @@ bool DoublyLinkedList<T>::removeBack() {
  */
 template <typename T>
 bool DoublyLinkedList<T>::remove(const T &value) {
-	return false;
+    Node *current = head->next;
+
+    while (current != tail) {
+        if (current->data == value) {
+            removeNode(current);
+            return true;
+        }
+
+        current = current->next;
+    }
+
+    return false;
 }
 
 /**
