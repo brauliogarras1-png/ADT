@@ -162,7 +162,7 @@ bool DoublyLinkedList<T>::search(const T &value) const {
 	return found;
 }
 
-/**
+/***
  * Removes the first element. Parameters: none.
  * @return True if removed, false if empty.
  * Complexity: O(1) - Removes head->next directly in constant time.
