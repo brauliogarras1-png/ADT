@@ -169,10 +169,11 @@ bool DoublyLinkedList<T>::search(const T &value) const {
  */
 template <typename T>
 bool DoublyLinkedList<T>::removeFront() {
-	if (numElements == 0) {
+	if (numElements == 0){
 		return false;
 	}
-	removeNode(head->next);
+	
+	removeNode (head->next);
 	return true;
 }
 
