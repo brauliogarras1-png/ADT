@@ -1,7 +1,7 @@
 /*
  * Doubly linked list exercise with front and back sentinels. Requires C++17.
- * Student IDs: A01234567, A01234567, A01234567
- * Modified: 2026-09-22
+ * Student IDs: A01648054, A01649125, A01642979, A01641343
+ * Modified: 2026-09-24
  *
  * Replace the student ID placeholders and complete the six TODO methods.
  * Keep declarations unchanged; do not use break or continue in loops.
@@ -126,20 +126,22 @@ DoublyLinkedList<T>::~DoublyLinkedList() {
  * Inserts at the front. Returns: none.
  * @param value Element to insert.
  * TODO: Use insertBefore with the node after head.
- * Complexity: O( ) -
+ * Complexity: O(1) - It calls the function insertBefore which has a complexity of O(1).
  */
 template <typename T>
 void DoublyLinkedList<T>::insertFront(const T &value) {
+	insertBefore(head->next, value);
 }
 
 /**
  * Inserts at the back. Returns: none.
  * @param value Element to insert.
  * TODO: Use insertBefore with tail.
- * Complexity: O( ) -
+ * Complexity: O(1) - It calls the function insertBefore which has a complexity of O(1).
  */
 template <typename T>
 void DoublyLinkedList<T>::insertBack(const T &value) {
+	insertBefore(tail, value);
 }
 
 /**
@@ -147,11 +149,20 @@ void DoublyLinkedList<T>::insertBack(const T &value) {
  * @param value Element to search for.
  * @return True if found, false otherwise.
  * TODO: Traverse from head->next to tail, excluding both sentinels.
- * Complexity: O( ) -
+ * Complexity: O(N) - May traverse up to n elements in the worst case.
  */
 template <typename T>
 bool DoublyLinkedList<T>::search(const T &value) const {
-	return false;
+    Node *current = head->next;
+    bool found = false;
+    while (current != tail && !found) {
+        if (current->data == value) {
+            found = true;
+        } else {
+            current = current->next;
+        }
+    }
+    return found;
 }
 
 /**
