@@ -126,20 +126,22 @@ DoublyLinkedList<T>::~DoublyLinkedList() {
  * Inserts at the front. Returns: none.
  * @param value Element to insert.
  * TODO: Use insertBefore with the node after head.
- * Complexity: O( ) -
+ * Complexity: O(1) - it calls the function insertBefore which is O(1).
  */
 template <typename T>
 void DoublyLinkedList<T>::insertFront(const T &value) {
+	insertBefore(head -> next, value);
 }
 
 /**
  * Inserts at the back. Returns: none.
  * @param value Element to insert.
  * TODO: Use insertBefore with tail.
- * Complexity: O( ) -
+ * Complexity: O(1) - it calls the function insertBefore which is O(1).
  */
 template <typename T>
 void DoublyLinkedList<T>::insertBack(const T &value) {
+	insertBefore(tail, value);
 }
 
 /**
@@ -147,7 +149,7 @@ void DoublyLinkedList<T>::insertBack(const T &value) {
  * @param value Element to search for.
  * @return True if found, false otherwise.
  * TODO: Traverse from head->next to tail, excluding both sentinels.
- * Complexity: O( ) -
+ * Complexity: O( ) - 
  */
 template <typename T>
 bool DoublyLinkedList<T>::search(const T &value) const {
@@ -173,11 +175,7 @@ bool DoublyLinkedList<T>::removeFront() {
  */
 template <typename T>
 bool DoublyLinkedList<T>::removeBack() {
-	if(numElements == 0){
-		return false;
-	}
-	removeNode(tail->prev);
-	return true;
+	return false;
 }
 
 /**
@@ -189,18 +187,7 @@ bool DoublyLinkedList<T>::removeBack() {
  */
 template <typename T>
 bool DoublyLinkedList<T>::remove(const T &value) {
-    Node *current = head->next;
-
-    while (current != tail) {
-        if (current->data == value) {
-            removeNode(current);
-            return true;
-        }
-
-        current = current->next;
-    }
-
-    return false;
+	return false;
 }
 
 /**
