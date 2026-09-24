@@ -125,8 +125,7 @@ DoublyLinkedList<T>::~DoublyLinkedList() {
 /**
  * Inserts at the front. Returns: none.
  * @param value Element to insert.
- * TODO: Use insertBefore with the node after head.
- * Complexity: O(1) - It calls the function insertBefore which has a complexity of O(1).
+ * Complexity: O(1) - Inserts a node before head->next in constant time.
  */
 template <typename T>
 void DoublyLinkedList<T>::insertFront(const T &value) {
@@ -136,8 +135,7 @@ void DoublyLinkedList<T>::insertFront(const T &value) {
 /**
  * Inserts at the back. Returns: none.
  * @param value Element to insert.
- * TODO: Use insertBefore with tail.
- * Complexity: O(1) - It calls the function insertBefore which has a complexity of O(1).
+ * Complexity: O(1) - Inserts a node before tail in constant time.
  */
 template <typename T>
 void DoublyLinkedList<T>::insertBack(const T &value) {
@@ -148,43 +146,44 @@ void DoublyLinkedList<T>::insertBack(const T &value) {
  * Checks whether a value is present.
  * @param value Element to search for.
  * @return True if found, false otherwise.
- * TODO: Traverse from head->next to tail, excluding both sentinels.
- * Complexity: O(N) - May traverse up to n elements in the worst case.
+ * Complexity: O(n) - May traverse up to n elements in the worst case.
  */
 template <typename T>
 bool DoublyLinkedList<T>::search(const T &value) const {
-    Node *current = head->next;
-    bool found = false;
-    while (current != tail && !found) {
-        if (current->data == value) {
-            found = true;
-        } else {
-            current = current->next;
-        }
-    }
-    return found;
+	Node *current = head->next;
+	bool found = false;
+	while (current != tail && !found) {
+		if (current->data == value) {
+			found = true;
+		} else {
+			current = current->next;
+		}
+	}
+	return found;
 }
 
 /**
  * Removes the first element. Parameters: none.
  * @return True if removed, false if empty.
- * TODO: Check the count, then use removeNode on head->next.
- * Complexity: O( ) -
+ * Complexity: O(1) - Removes head->next directly in constant time.
  */
 template <typename T>
 bool DoublyLinkedList<T>::removeFront() {
-	return false;
+	if (numElements == 0) {
+		return false;
+	}
+	removeNode(head->next);
+	return true;
 }
 
 /**
  * Removes the last element. Parameters: none.
  * @return True if removed, false if empty.
- * TODO: Check the count, then use removeNode on tail->prev.
- * Complexity: O( ) -
+ * Complexity: O(1) - Removes tail->prev directly in constant time.
  */
 template <typename T>
 bool DoublyLinkedList<T>::removeBack() {
-	if(numElements == 0){
+	if (numElements == 0) {
 		return false;
 	}
 	removeNode(tail->prev);
@@ -195,23 +194,22 @@ bool DoublyLinkedList<T>::removeBack() {
  * Removes the first matching element.
  * @param value Element to remove.
  * @return True if removed, false if absent.
- * TODO: Search real nodes and use removeNode on the first match.
- * Complexity: O( ) -
+ * Complexity: O(n) - May traverse up to n elements to find the matching node.
  */
 template <typename T>
 bool DoublyLinkedList<T>::remove(const T &value) {
-    Node *current = head->next;
+	Node *current = head->next;
 
-    while (current != tail) {
-        if (current->data == value) {
-            removeNode(current);
-            return true;
-        }
+	while (current != tail) {
+		if (current->data == value) {
+			removeNode(current);
+			return true;
+		}
 
-        current = current->next;
-    }
+		current = current->next;
+	}
 
-    return false;
+	return false;
 }
 
 /**
